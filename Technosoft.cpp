@@ -32,8 +32,8 @@ bool Technosoft::Sync(void) {
 	// per user manual, try 15 times before throwing error
 	//flush port TX/RX buffer between attempts
 	for (int i = 0; i < 15; i++) {
-		while(port->read() >= 0);
 		port->flush();
+		while(port->read() >= 0);
 		port->write(&sync_byte, 1);
 		delay(2);
 		while(port->readBytes(&ret_byte, 1) != 1);
