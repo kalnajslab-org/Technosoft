@@ -433,7 +433,10 @@ int Technosoft::Perform_Transaction(uint8_t * write_buffer, uint8_t * read_buffe
 	if (!port_initialized) {
 		return -14;
 	}
-
+	// Clear the serial buffers TX and RX
+	while(port->read() >= 0);
+	port->flush();
+	
 	// Write the message
 	if (port->write(write_buffer, write_size) != write_size) return -10;
 
